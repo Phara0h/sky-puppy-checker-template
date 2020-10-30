@@ -1,0 +1,32 @@
+# sky-puppy-checker-template
+A Sky Puppy template to use to create your own checkers
+
+clone this repository for a good start
+
+## Install
+
+```bash
+npm install -g sky-puppy-checker-template
+```
+## Test
+
+```bash
+npm test
+```
+
+## Sample Config
+
+
+```json
+{
+  checkers: {
+    "sky-puppy-checker-template": {
+    }
+  }
+}
+
+```
+
+## Changelog
+
+{{doc1}}
