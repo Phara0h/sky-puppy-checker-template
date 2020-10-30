@@ -27,6 +27,14 @@
   "homepage": "https://github.com/Phara0h/sky-puppy-checker-template#readme",
   "dependencies": {},
   "devDependencies": {
-    "sky-puppy": "latest"
+    "sky-puppy": "latest",
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5",
+    "prettier-eslint": "^11.0.0",
+    "jsdoc-to-markdown": "^6.0.1",
+    "auto-changelog": "^2.2.0",
+    "mdsquash": "^1.0.5"
   }
 }
