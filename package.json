@@ -1,6 +1,6 @@
 {
   "name": "sky-puppy-checker-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Sky Puppy template to use to create your own checkers",
   "main": "./src/index.js",
   "scripts": {
