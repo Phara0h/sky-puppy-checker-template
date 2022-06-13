@@ -32,10 +32,6 @@ class Scylladb {
   async check() {
     try {
       const client = new this.cassandra.Client(this.connection);
-      // this.db = await this.scylla.connect(
-      //   this.settings.url,
-      //   this.settings.scylla_settings
-      // );
       await client.shutdown();
       return {
         code: 200,
