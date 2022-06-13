@@ -1,25 +1,56 @@
-class Checker {
+class Scylladb {
   constructor(config, service, settings) {
     this.config = config;
     this.service = service;
     this.settings = settings;
-
-    // just for fun;
-    this.flip = false;
+    this.cassandra = require('cassandra-driver');
+    const distance = this.cassandra.types.distance;
+    
+    this.connection = {
+      contactPoints: this.settings.contactPoints,
+      credentials: {
+        username: this.settings.username,
+        password: this.settings.password
+      },
+      localDataCenter: 'us-east',
+      keyspace: 'directory',
+      pooling: {
+        coreConnectionsPerHost: {
+          [distance.local]: 9,
+          [distance.remote]: 9
+        },
+        maxRequestsPerConnection: 5000
+      },
+      encoding: {
+        copyBuffer: false
+      }
+    };
+    console.log(this.connection);
   }
-  async init() {
-    // Do your init things here.
-  }
+  async init() { }
 
   async check() {
-    // do your checking here. Expects an object returned with a code prop (curr: v1.0.0)
-    // this might change.
-    return {
-      code: (this.flip = !this.flip) ? 200 : 500
-    };
+    try {
+      const client = new this.cassandra.Client(this.connection);
+      // this.db = await this.scylla.connect(
+      //   this.settings.url,
+      //   this.settings.scylla_settings
+      // );
+      await client.shutdown();
+      return {
+        code: 200,
+        message: 'OK'
+      };
+    } catch (e) {
+      console.log(e);
+      return {
+        code: 500,
+        message: e.message
+      };
+    }
   }
 }
 
 module.exports = function(config, service, settings) {
-  return new Checker(config, service, settings);
+  return new Scylladb(config, service, settings);
 };
