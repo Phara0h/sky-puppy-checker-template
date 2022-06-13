@@ -1,10 +1,10 @@
 {
-  "name": "sky-puppy-checker-template",
+  "name": "sky-puppy-scylla-checker",
   "version": "1.0.1",
-  "description": "A Sky Puppy template to use to create your own checkers",
+  "description": "A Sky Puppy scylladb checker",
   "main": "./src/index.js",
   "scripts": {
-    "test": "SKY_PUPPY_CONFIG_PATH=./test sky-puppy",
+    "test": "SKY_PUPPY_CONFIG_PATH=./test",
     "version": "auto-changelog -l false --sort-commits date-desc --package --hide-credit --template changelog-template.hbs -p && mdsquash -i  CHANGELOG.md && git add -A CHANGELOG.md && git add -A README.md",
     "postversion": "git push &&  git push --tags && npm publish"
   },
@@ -17,7 +17,9 @@
     "health",
     "check",
     "puppy",
-    "sky-puppy"
+    "sky-puppy",
+    "cassandra",
+    "scylla"
   ],
   "author": "Phara0h",
   "license": "GPL-3.0-or-later",
@@ -25,7 +27,10 @@
     "url": "https://github.com/Phara0h/sky-puppy-checker-template/issues"
   },
   "homepage": "https://github.com/Phara0h/sky-puppy-checker-template#readme",
-  "dependencies": {},
+  "dependencies": {
+    "cassandra-driver": "latest",
+    "sky-puppy": "latest"
+  },
   "devDependencies": {
     "auto-changelog": "^2.2.1",
     "eslint": "^7.8.1",
@@ -33,7 +38,6 @@
     "eslint-plugin-prettier": "^3.1.4",
     "mdsquash": "^1.0.5",
     "prettier": "^2.0.5",
-    "prettier-eslint": "^11.0.0",
-    "sky-puppy": "latest"
+    "prettier-eslint": "^11.0.0"
   }
 }
