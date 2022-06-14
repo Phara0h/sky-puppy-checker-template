@@ -1,25 +1,40 @@
-class Checker {
+const redis_module = require('redis');
+const createClient = redis_module.createClient;
+
+class redis {
   constructor(config, service, settings) {
     this.config = config;
     this.service = service;
     this.settings = settings;
 
-    // just for fun;
-    this.flip = false;
+    this.db = null;
   }
-  async init() {
-    // Do your init things here.
-  }
+  async init() { }
 
   async check() {
-    // do your checking here. Expects an object returned with a code prop (curr: v1.0.0)
-    // this might change.
-    return {
-      code: (this.flip = !this.flip) ? 200 : 500
-    };
+
+    try {
+      const client = createClient({
+        url: settings.REDIS_URL
+      });
+
+      const conn = await client.connect();
+      await client.time();
+      await client.quit();
+
+      return {
+        code: 200,
+        message: 'OK'
+      };
+    } catch (e) {
+      console.log(e);
+      return {
+        code: 500,
+        message: e.message
+      };
+    }
   }
 }
-
-module.exports = function(config, service, settings) {
-  return new Checker(config, service, settings);
+module.exports = function (config, service, settings) {
+  return new redis(config, service, settings);
 };
